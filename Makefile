@@ -2,7 +2,7 @@ CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -pedantic
 LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
 
-SRC = main.cpp
+SRC = ./src/main.cpp
 OBJ = $(SRC:.cpp=.o)
 TARGET = main
 

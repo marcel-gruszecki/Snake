@@ -76,7 +76,7 @@ void Snake::is_collision() {
         reset_position();
     }
 
-    for(int i = 1; i < position.size(); i++) {
+    for(long unsigned int i = 1; i < position.size(); i++) {
         if(x == position[i].first && y == position[i].second) {
             reset_position();
             break;
@@ -115,7 +115,7 @@ void Snake::snack_generator() {
 
         is_empty = true;
 
-        for(const auto i : position) {
+        for(const auto& i : position) {
             if(x == i.first && y == i.second) {
                 is_empty = false;
                 break;
@@ -149,7 +149,7 @@ void Snake::print(sf::RenderWindow& window) {
 }
 
 
-int main(int argc, char* argv[]) {
+int main() {
     std::srand(std::time(nullptr));
 
     sf::RenderWindow window(
