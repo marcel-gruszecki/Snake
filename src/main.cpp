@@ -65,6 +65,7 @@ void Snake::change_direction(direction n) {
 void Snake::reset_position() {
     position = {{35, 28}, {36, 28}, {37, 28}};
     snack_generator();
+    dir = LEFT;
 }
 
 void Snake::is_collision() {
@@ -72,7 +73,7 @@ void Snake::is_collision() {
     int y = position.front().second;
     if(x < 0 || y < 0) {
         reset_position();
-    }else if(x > WIDTH || y > HIGHT) {
+    }else if(x == WIDTH_X || y == HIGHT_Y) {
         reset_position();
     }
 
@@ -122,7 +123,7 @@ void Snake::snack_generator() {
             }
         }
     }
-    std::cout << x << " " << y << std::endl;
+    //std::cout << x << " " << y << std::endl;
     snack.first = x;
     snack.second = y;
 
@@ -153,7 +154,7 @@ int main() {
     std::srand(std::time(nullptr));
 
     sf::RenderWindow window(
-        sf::VideoMode({WIDTH, HIGHT}), 
+        sf::VideoMode({WIDTH + 170, HIGHT}), 
         "Snake",
         sf::Style::Titlebar | sf::Style::Close //Resize is locked
     );
@@ -162,9 +163,16 @@ int main() {
 
     window.setPosition(sf::Vector2i((1920 - WIDTH) / 2, (1080 - HIGHT) / 2));
 
+    sf::Font font;
+    if (!font.loadFromFile("fonts/Verdana.ttf")) {
+        std::cerr << "Font error!!!" << std::endl;
+    }
+
     // sf::Vector2u size = window.getSize();
     // unsigned int width = size.x;
     // unsigned int height = size.y;
+
+    int best_score = 0;
 
     Snake snake;
 
@@ -238,6 +246,28 @@ int main() {
             snake.is_collision();
 
             snake.eating();
+            
+            if(best_score < snake.position.size() - 3) {
+                best_score = snake.position.size() - 3;
+            }
+
+            //std::cout << "Snake: " << snake.position.front().first << " " << snake.position.front().second << std::endl;
+
+            sf::Text text;
+            text.setFont(font); 
+            text.setString("Best score " + std::to_string(best_score));
+            text.setCharacterSize(24);
+            text.setFillColor(sf::Color::White);
+            text.setPosition(820, 0);
+            window.draw(text);
+            
+            text.setFont(font); 
+            text.setString("Score " + std::to_string(snake.position.size() - 3));
+            text.setCharacterSize(24);
+            text.setFillColor(sf::Color::White);
+            text.setPosition(820, 20);
+            window.draw(text);
+            // std::cout << "Points: " << snake.position.size() - 3 << std::endl;
             //window.clear(sf::Color::Green);
             window.display();
 
