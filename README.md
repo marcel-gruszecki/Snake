@@ -19,3 +19,10 @@ W katalogu projektu uruchom:
 ```bash
 make
 ./main
+
+---
+
+## Video
+<video width="640" height="360" controls>
+  <source src="video.webm" type="video/webm">
+</video>
