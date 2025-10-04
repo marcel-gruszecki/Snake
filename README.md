@@ -23,4 +23,4 @@ make
 ---
 
 ## Video
-![Snake Demo](video.gif)
+![Snake Demo](Video.gif)
