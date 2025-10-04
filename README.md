@@ -19,7 +19,7 @@ W katalogu projektu uruchom:
 ```bash
 make
 ./main
-
+```
 ---
 
 ## Video
